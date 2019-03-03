@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Formacao de taiko</Name>
+    <Version>1.0</Version>
+    <Title>Formacao de taiko</Title>
+    <Publisher>ABT/Gabriel Lasso</Publisher>
+    <!-- Directory name is used in component.xml -->
+    <StartMenuDir>Formacao de taiko</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/Formacao de taiko</TargetDir>
+</Installer>
