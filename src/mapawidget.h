@@ -2,10 +2,8 @@
 #define MAPAWIDGET_H
 
 #include <QWidget>
-#include <mapa.h>
 #include <QLabel>
 #include <QGraphicsView>
-#include <qgraphicstaikoitem.h>
 #include <QFile>
 #include <QTextStream>
 #include <QFileDialog>
@@ -22,6 +20,8 @@
 #include <QHashIterator>
 #include "mapascene.h"
 #include "mapaview.h"
+#include "mapa.h"
+#include "qgraphicstaikoitem.h"
 
 namespace Ui {
 class MapaWidget;

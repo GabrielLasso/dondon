@@ -2,12 +2,12 @@
 #define QGRAPHICSTAIKOITEM_H
 
 #include <QGraphicsPixmapItem>
-#include <instrumento.h>
 #include <QGraphicsSceneMouseEvent>
 #include <QVariant>
 #include <QGraphicsScene>
 #include <QtMath>
 #include <QSet>
+#include "instrumento.h"
 
 class QGraphicsTaikoItem : public QObject, public QGraphicsPixmapItem
 {

@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <mapa.h>
-#include <mapawidget.h>
 #include <QDoubleSpinBox>
 #include <QDialog>
 #include <QFormLayout>
@@ -13,6 +11,8 @@
 #include <QDesktopWidget>
 #include <QShortcut>
 #include <QKeySequence>
+#include "mapa.h"
+#include "mapawidget.h"
 
 namespace Ui {
 class MainWindow;

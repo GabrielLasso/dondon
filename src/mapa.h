@@ -4,10 +4,10 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QPainter>
-#include <instrumento.h>
 #include <QList>
 #include <QTextStream>
 #include <QString>
+#include "instrumento.h"
 
 class Mapa
 {
