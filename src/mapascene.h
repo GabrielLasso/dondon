@@ -8,6 +8,7 @@
 #include "qgraphicstaikoitem.h"
 #include "mapa.h"
 #include <QUndoStack>
+#include <QGraphicsColorizeEffect>
 #include "commandmove.h"
 #include "commandrotate.h"
 #include "commandadd.h"
@@ -19,7 +20,7 @@ class MapaScene : public QGraphicsScene
 public:
     MapaScene(QObject* parent);
     void updateScene(Mapa* data, int ppm);
-    void addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0, bool newInstrument = true);
+    void addInstrument(QString name, qreal x=0, qreal y=0, qreal angle=0, bool emprestado = false, bool newInstrument = true);
     QList<QGraphicsTaikoItem*> getTaikoItems();
     Mapa* data;
     int ppm;

@@ -5,7 +5,7 @@ MapaWidget::MapaWidget(QWidget *parent, Mapa *data) :
     QWidget(parent),
     ui(new Ui::MapaWidget)
 {
-    ppm = 81; // Pixel per meter
+    ppm = 60; // Pixel per meter
     ui->setupUi(this);
     this->data = data;
     this->view = ui->view;
@@ -36,7 +36,7 @@ void MapaWidget::createScene() {
     scene = new MapaScene(this);
     view->setScene(scene);
     foreach (Instrumento taiko, *data->taikos) {
-        scene->addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle, false);
+        scene->addInstrument(taiko.filename, taiko.x, taiko.y, taiko.angle, taiko.emprestado, false);
     }
     scene->updateScene(data, ppm);
 }
@@ -83,7 +83,7 @@ void MapaWidget::save(QString filename){
         foreach (QGraphicsItem* item, scene->items()){
             if (item->type() == QGraphicsTaikoItem::Type) {
                 QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);
-                stream<<taiko->x()<<","<<taiko->y()<<","<<taiko->rotation()<<","<<taiko->data.filename<<endl;
+                stream<<taiko->x()<<","<<taiko->y()<<","<<taiko->rotation()<<","<<taiko->data.filename<<","<<taiko->data.emprestado<<endl;
             }
         }
         file.close();

@@ -81,6 +81,14 @@ void MapaScene::keyPressEvent(QKeyEvent * keyEvent)
             updateScene(data, ppm);
         }
     break;
+    case Qt::Key_E:
+        foreach(QGraphicsItem* item, selectedItems)
+        {
+            QGraphicsTaikoItem* taiko = static_cast<QGraphicsTaikoItem*>(item);
+            taiko->data.emprestado = !taiko->data.emprestado;
+        }
+        updateScene(data, ppm);
+    break;
     }
 }
 
@@ -140,16 +148,33 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
 
     // Taikos
     foreach (QGraphicsTaikoItem* taiko, taikos) {
+        if (taiko->data.emprestado) {
+            QGraphicsColorizeEffect* borrowed = new QGraphicsColorizeEffect;
+            borrowed->setColor(QColor(128,128,128));
+            taiko->setGraphicsEffect(borrowed);
+        } else {
+            QGraphicsColorizeEffect* owned = new QGraphicsColorizeEffect;
+            owned->setColor(QColor(0,0,0));
+            taiko->setGraphicsEffect(owned);
+        }
         addItem(taiko);
     }
 
     // Instrument List
     QMap<QString, int> instrument_hash;
-    addRect((data->width/2+1)*ppm, -data->height/2*ppm,200,data->height*ppm);
+    QMap<QString, int> borrowed_instrument_hash;
+    addRect((data->width/2+1)*ppm, -data->height/2*ppm,200,data->height*ppm/2);
     QGraphicsTextItem *instrumentos_title = addText("Instrumentos");
     instrumentos_title->setPos((data->width/2+1)*ppm+100-instrumentos_title->boundingRect().width()/2, -data->height/2*ppm);
+    addRect((data->width/2+1)*ppm,0,200,data->height*ppm/2);
+    QGraphicsTextItem *borrowed_instrumentos_title = addText("Instrumentos emprestados");
+    borrowed_instrumentos_title->setPos((data->width/2+1)*ppm+100-borrowed_instrumentos_title->boundingRect().width()/2, 0);
     foreach (QGraphicsTaikoItem* taiko, taikos) {
-        instrument_hash.insert(taiko->data.filename,instrument_hash.value(taiko->data.filename)+1);
+        if (taiko->data.emprestado) {
+            borrowed_instrument_hash.insert(taiko->data.filename,borrowed_instrument_hash.value(taiko->data.filename)+1);
+        } else {
+            instrument_hash.insert(taiko->data.filename,instrument_hash.value(taiko->data.filename)+1);
+        }
     }
     QMapIterator<QString, int> iterator(instrument_hash);
     for (i = 2; iterator.hasNext(); i++) {
@@ -159,10 +184,18 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
         QGraphicsTextItem *instrument_count = addText(QString::number(iterator.value()));
         instrument_count->setPos((data->width/2+1)*ppm+184, -data->height/2*ppm+16*i);
     }
+    QMapIterator<QString, int> borrowed_iterator(borrowed_instrument_hash);
+    for (i = 2; borrowed_iterator.hasNext(); i++) {
+        borrowed_iterator.next();
+        QGraphicsTextItem *instrument_name = addText(borrowed_iterator.key());
+        instrument_name->setPos((data->width/2+1)*ppm, 16*i);
+        QGraphicsTextItem *instrument_count = addText(QString::number(borrowed_iterator.value()));
+        instrument_count->setPos((data->width/2+1)*ppm+184, 16*i);
+    }
 }
 
-void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool newInstrument) {
-    Instrumento taiko(x,y,angle,name);
+void MapaScene::addInstrument(QString name, qreal x, qreal y, qreal angle, bool emprestado, bool newInstrument) {
+    Instrumento taiko(x,y,angle,name, emprestado);
     QGraphicsTaikoItem *t = new QGraphicsTaikoItem(taiko);
     t->setOffset(-t->width/2,-t->height/2);
     t->setFlag(QGraphicsItem::ItemIsSelectable);
@@ -203,7 +236,7 @@ void MapaScene::copy() {
 
 void MapaScene::paste() {
     foreach (QGraphicsTaikoItem* taiko, this->clipboard){
-        addInstrument(taiko->data.filename, taiko->data.x, taiko->data.y, taiko->data.angle);
+        addInstrument(taiko->data.filename, taiko->data.x, taiko->data.y, taiko->data.angle, taiko->data.emprestado);
     }
     updateScene(data, ppm);
 }
