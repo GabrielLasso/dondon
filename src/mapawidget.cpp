@@ -51,6 +51,8 @@ void MapaWidget::edit() {
     mWidth->setValue(data->width);
     QDoubleSpinBox* mHeight = new QDoubleSpinBox(dialog);;
     mHeight->setValue(data->height);
+    QCheckBox* mRouded = new QCheckBox(dialog);
+    mRouded->setChecked(data->roundedStage);
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
                                    Qt::Horizontal, dialog);
     form.addRow(QString("Título:"),mTitle);
@@ -58,6 +60,7 @@ void MapaWidget::edit() {
     form.addRow(QString("Cidade:"),mCity);
     form.addRow(QString("Largura:"),mWidth);
     form.addRow(QString("Altura:"),mHeight);
+    form.addRow(QString("Frente arredondada:"),mRouded);
     form.addRow(&buttonBox);
     QObject::connect(&buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(&buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
@@ -65,6 +68,7 @@ void MapaWidget::edit() {
     if (dialog->exec() == QDialog::Accepted) {
         data->height = mHeight->value();
         data->width = mWidth->value();
+        data->roundedStage = mRouded->isChecked();
         data->titulo = mTitle->text();
         data->equipe = mTeam->text();
         data->cidade = mCity->text();
@@ -80,6 +84,7 @@ void MapaWidget::save(QString filename){
         stream<<data->equipe<<endl;
         stream<<data->cidade<<endl;
         stream<<data->height<<","<<data->width<<endl;
+        stream<<data->roundedStage<<endl;
         foreach (QGraphicsItem* item, scene->items()){
             if (item->type() == QGraphicsTaikoItem::Type) {
                 QGraphicsTaikoItem* taiko = dynamic_cast<QGraphicsTaikoItem*>(item);

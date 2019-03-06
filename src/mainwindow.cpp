@@ -34,7 +34,8 @@ void MainWindow::criaMapa() {
     QLineEdit* mTeam= new QLineEdit(dialog);
     QLineEdit* mCity= new QLineEdit(dialog);
     QDoubleSpinBox* mWidth= new QDoubleSpinBox(dialog);
-    QDoubleSpinBox* mHeight = new QDoubleSpinBox(dialog);;
+    QDoubleSpinBox* mHeight = new QDoubleSpinBox(dialog);
+    QCheckBox* mRouded = new QCheckBox(dialog);
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
                                Qt::Horizontal, dialog);
     form.addRow(QString("Título:"),mTitle);
@@ -42,12 +43,13 @@ void MainWindow::criaMapa() {
     form.addRow(QString("Cidade:"),mCity);
     form.addRow(QString("Largura:"),mWidth);
     form.addRow(QString("Altura:"),mHeight);
+    form.addRow(QString("Frente arredondada:"),mRouded);
     form.addRow(&buttonBox);
     QObject::connect(&buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(&buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
     if (dialog->exec() == QDialog::Accepted) {
-        Mapa* map = new Mapa(mHeight->value(), mWidth->value(), mTitle->text(), mTeam->text(), mCity->text());
+        Mapa* map = new Mapa(mHeight->value(), mWidth->value(), mRouded->isChecked(), mTitle->text(), mTeam->text(), mCity->text());
         mostraMapa(map);
     }
 }

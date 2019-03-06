@@ -127,24 +127,45 @@ void MapaScene::updateScene(Mapa* data, int ppm) {
     addLine((200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm-24, (200+ppm)/2+cityHUD->boundingRect().width(), -(data->height/2+1)*ppm);
 
     // Grid
+    bool roundedStage = data->roundedStage;
     addLine(-data->width/2*ppm+2,0,data->width/2*ppm-2,0,pen5);
     addLine(0,-data->height/2*ppm+2,0,data->height/2*ppm-2,pen5);
     for (i=-int(data->height/2);i<=data->height/2;i++){
-        for(j=-int(data->width/2);j<=data->width/2;j++){
+        if (roundedStage && i+1 > data->height/2) {
+            QPainterPath* path = new QPainterPath;
+            path->arcMoveTo(-data->width/2*ppm,(data->height/2-2)*ppm,data->width*ppm,2*ppm,0);
+            path->arcTo(-data->width/2*ppm,(data->height/2-2)*ppm,data->width*ppm,2*ppm, 0,-180);
+            addPath(*path);
+        } else {
+            if (i%2==0)
+                addLine(-data->width*ppm/2+1,i*ppm,data->width*ppm/2-1,i*ppm, pen3);
+            else
+                addLine(-data->width*ppm/2,i*ppm,data->width*ppm/2,i*ppm);
+        }
+    }
+    for(j=-int(data->width/2);j<=data->width/2;j++){
+        if (roundedStage) {
+            if (j%2==0)
+                addLine(j*ppm,-data->height*ppm/2+1,j*ppm,(data->height-2)*ppm/2-1, pen3);
+            else
+                addLine(j*ppm,-data->height*ppm/2,j*ppm,(data->height-2)*ppm/2);
+        } else {
             if (j%2==0)
                 addLine(j*ppm,-data->height*ppm/2+1,j*ppm,data->height*ppm/2-1, pen3);
             else
                 addLine(j*ppm,-data->height*ppm/2,j*ppm,data->height*ppm/2);
         }
-        if (i%2==0)
-            addLine(-data->width*ppm/2+1,i*ppm,data->width*ppm/2-1,i*ppm, pen3);
-        else
-            addLine(-data->width*ppm/2,i*ppm,data->width*ppm/2,i*ppm);
     }
-    addLine(data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
-    addLine(-data->width/2*ppm,data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
-    addLine(-data->width/2*ppm,-data->height/2*ppm,-data->width/2*ppm,data->height/2*ppm);
     addLine(-data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,-data->height/2*ppm);
+    if (roundedStage) {
+        addLine(data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,data->height/2*ppm-ppm);
+        addLine(-data->width/2*ppm,data->height/2*ppm-ppm,data->width/2*ppm,data->height/2*ppm-ppm);
+        addLine(-data->width/2*ppm,-data->height/2*ppm,-data->width/2*ppm,data->height/2*ppm-ppm);
+    } else {
+        addLine(data->width/2*ppm,-data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
+        addLine(-data->width/2*ppm,data->height/2*ppm,data->width/2*ppm,data->height/2*ppm);
+        addLine(-data->width/2*ppm,-data->height/2*ppm,-data->width/2*ppm,data->height/2*ppm);
+    }
 
     // Taikos
     foreach (QGraphicsTaikoItem* taiko, taikos) {

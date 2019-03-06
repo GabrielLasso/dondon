@@ -18,6 +18,7 @@
 #include <QImage>
 #include <QHash>
 #include <QHashIterator>
+#include <QCheckBox>
 #include "mapascene.h"
 #include "mapaview.h"
 #include "mapa.h"

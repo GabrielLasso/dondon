@@ -12,14 +12,14 @@
 class Mapa
 {
 public:
-    explicit Mapa(double height = 0, double width = 0, QString titulo = "",QString equipe = "", QString cidade = "", QList<Instrumento>* taikos = new QList<Instrumento>);
+    explicit Mapa(double height = 0, double width = 0, bool roundedStage = false, QString titulo = "",QString equipe = "", QString cidade = "", QList<Instrumento>* taikos = new QList<Instrumento>);
     double height, width;
+    bool roundedStage;
     QList<Instrumento>* taikos;
     QString titulo;
     QString equipe;
     QString cidade;
     static Mapa* carrega_mapa(QString file);
-
 signals:
 
 private:
