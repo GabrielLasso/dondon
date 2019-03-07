@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package>
-    <DisplayName>Formacao de taiko</DisplayName>
-    <Description>Crie e edite formacoes de palco</Description>
-    <Version>1.0</Version>
-    <ReleaseDate>2011-01-10</ReleaseDate>
+    <DisplayName>Mapa de Palco</DisplayName>
+    <Description>Crie e edite mapas de palco</Description>
+    <Version>1.1</Version>
+    <ReleaseDate>2019-03-07</ReleaseDate>
     <Licenses>
         <License name="MIT" file="license.txt" />
     </Licenses>

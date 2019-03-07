@@ -37,9 +37,9 @@ Component.prototype.createOperations = function()
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/Formacaotaiko.exe", "@StartMenuDir@/Formação de taiko.lnk",
+        component.addOperation("CreateShortcut", "@TargetDir@/Formacaotaiko.exe", "@StartMenuDir@/Mapa De Palco.lnk",
             "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll",
-            "iconId=2", "description=Crie e edite formações de palco");
-        component.addOperation("CreateShortcut", "@TargetDir@/FormacaoTaiko.exe", "@DesktopDir@/Formação de taiko.lnk");
+            "iconId=2", "description=Crie e edite mapas de palco");
+        component.addOperation("CreateShortcut", "@TargetDir@/MapaPalco.exe", "@DesktopDir@/Mapa de Palco.lnk");
     }
 }

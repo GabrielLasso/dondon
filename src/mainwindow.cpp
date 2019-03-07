@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     saveMapa->setShortcut(QKeySequence::Save);
     exportMapa = ui->actionExportar_como_imagem;
     editMapa = ui->actionPropriedades_do_mapa;
+    setWindowTitle("Mapa De Palco");
     resize(QDesktopWidget().availableGeometry(this).size());
     connect(novoMapa, SIGNAL(triggered()), this, SLOT(criaMapa()));
     connect(loadMapa, SIGNAL(triggered()), this, SLOT(carregaMapa()));
