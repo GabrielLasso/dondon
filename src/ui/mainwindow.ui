@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>153</width>
-    <height>87</height>
+    <width>186</width>
+    <height>145</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -56,7 +56,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>153</width>
+     <width>186</width>
      <height>21</height>
     </rect>
    </property>
@@ -76,8 +76,16 @@
     </property>
     <addaction name="actionPropriedades_do_mapa"/>
    </widget>
+   <widget class="QMenu" name="menuSobre">
+    <property name="title">
+     <string>Sobre</string>
+    </property>
+    <addaction name="actionAjuda"/>
+    <addaction name="actionSobre"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEditar"/>
+   <addaction name="menuSobre"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -120,6 +128,16 @@
    </property>
    <property name="text">
     <string>&amp;Propriedades do mapa</string>
+   </property>
+  </action>
+  <action name="actionAjuda">
+   <property name="text">
+    <string>Ajuda</string>
+   </property>
+  </action>
+  <action name="actionSobre">
+   <property name="text">
+    <string>Sobre</string>
    </property>
   </action>
  </widget>

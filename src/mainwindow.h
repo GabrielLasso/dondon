@@ -11,6 +11,7 @@
 #include <QDesktopWidget>
 #include <QShortcut>
 #include <QKeySequence>
+#include <QMessageBox>
 #include "mapa.h"
 #include "mapawidget.h"
 
@@ -33,6 +34,8 @@ private:
     QAction* saveMapa;
     QAction* exportMapa;
     QAction* editMapa;
+    QAction* help;
+    QAction* about;
     void mostraMapa(Mapa* map);
 
 public slots:
@@ -41,6 +44,8 @@ public slots:
     void salvaMapa();
     void exportaImagem();
     void propriedadesMapa();
+    void showHelp();
+    void showAbout();
 
 private slots:
     void on_tabWidget_tabCloseRequested(int index);

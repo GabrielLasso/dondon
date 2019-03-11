@@ -31,12 +31,15 @@ public:
     QAction *actionSalvar_Mapa;
     QAction *actionExportar_como_imagem;
     QAction *actionPropriedades_do_mapa;
+    QAction *actionAjuda;
+    QAction *actionSobre;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEditar;
+    QMenu *menuSobre;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -44,7 +47,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(153, 87);
+        MainWindow->resize(186, 145);
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -63,6 +66,10 @@ public:
         actionPropriedades_do_mapa = new QAction(MainWindow);
         actionPropriedades_do_mapa->setObjectName(QStringLiteral("actionPropriedades_do_mapa"));
         actionPropriedades_do_mapa->setEnabled(false);
+        actionAjuda = new QAction(MainWindow);
+        actionAjuda->setObjectName(QStringLiteral("actionAjuda"));
+        actionSobre = new QAction(MainWindow);
+        actionSobre->setObjectName(QStringLiteral("actionSobre"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -87,11 +94,13 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 153, 24));
+        menuBar->setGeometry(QRect(0, 0, 186, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEditar = new QMenu(menuBar);
         menuEditar->setObjectName(QStringLiteral("menuEditar"));
+        menuSobre = new QMenu(menuBar);
+        menuSobre->setObjectName(QStringLiteral("menuSobre"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -102,12 +111,15 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEditar->menuAction());
+        menuBar->addAction(menuSobre->menuAction());
         menuFile->addAction(actionNovo_Mapa);
         menuFile->addAction(actionCarregar_Mapa);
         menuFile->addAction(actionSalvar_Mapa);
         menuFile->addSeparator();
         menuFile->addAction(actionExportar_como_imagem);
         menuEditar->addAction(actionPropriedades_do_mapa);
+        menuSobre->addAction(actionAjuda);
+        menuSobre->addAction(actionSobre);
 
         retranslateUi(MainWindow);
 
@@ -125,8 +137,11 @@ public:
         actionSalvar_Mapa->setText(QApplication::translate("MainWindow", "&Salvar Mapa", nullptr));
         actionExportar_como_imagem->setText(QApplication::translate("MainWindow", "&Exportar como imagem", nullptr));
         actionPropriedades_do_mapa->setText(QApplication::translate("MainWindow", "&Propriedades do mapa", nullptr));
+        actionAjuda->setText(QApplication::translate("MainWindow", "Ajuda", nullptr));
+        actionSobre->setText(QApplication::translate("MainWindow", "Sobre", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "Ar&quivo", nullptr));
         menuEditar->setTitle(QApplication::translate("MainWindow", "Edita&r", nullptr));
+        menuSobre->setTitle(QApplication::translate("MainWindow", "Sobre", nullptr));
     } // retranslateUi
 
 };
